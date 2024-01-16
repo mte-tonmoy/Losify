@@ -26,6 +26,7 @@ const client = new MongoClient(uri, {
        client.connect();
   
       const itemCollections = client.db("itemCollections").collection("itemData");
+      const requestcollection = client.db("itemCollections").collection("requestData");
       
       app.post("/additem", async (req, res) => {
         const addToys = req.body;
@@ -37,6 +38,21 @@ const client = new MongoClient(uri, {
 
       app.get("/allitem", async (req, res) => {
         const cursor = itemCollections.find();
+        const result = await cursor.toArray();
+        res.send(result);
+      });
+     
+
+      // request collection
+
+      app.post("/requestData", async (req, res) => {
+        const addToys = req.body;
+        const result = await requestcollection.insertOne(addToys);
+        res.send(result);
+      });
+
+      app.get("/requestData", async (req, res) => {
+        const cursor = requestcollection.find();
         const result = await cursor.toArray();
         res.send(result);
       });

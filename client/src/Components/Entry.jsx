@@ -2,8 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import Lottie from "lottie-react";
 import authentications from "../assets/authentications";
 import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
+import Swal from 'sweetalert2'
 
 
 const Entry = () => {
@@ -11,6 +12,7 @@ const Entry = () => {
   const [item, setItem] = useState(null);
   const { user } = useContext(AuthContext);
   const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch("https://server-tau-teal.vercel.app/allitem")
@@ -46,27 +48,27 @@ const Entry = () => {
     };
     console.log(itemData);
 
-    // fetch("https://server-tau-teal.vercel.app/additem", {
-    //   method: "POST",
-    //   headers: {
-    //     "content-type": "application/json",
-    //   },
-    //   body: JSON.stringify(itemData),
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     console.log(data);
-    //     if (data.insertedId) {
-    //       Swal.fire({
-    //         position: "top-end",
-    //         icon: "success",
-    //         title: "Item added successfully",
-    //         showConfirmButton: false,
-    //         timer: 1500
-    //       });
-    //       navigate('/item')
-    //     }
-    //   });
+    fetch("http://localhost:5000/requestData", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(itemData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.insertedId) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Successfully Requested",
+            showConfirmButton: false,
+            timer: 1500
+          });
+          navigate('/item')
+        }
+      });
   };
 
  
