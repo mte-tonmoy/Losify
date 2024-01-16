@@ -30,7 +30,7 @@ const Item = () => {
           {allToys.map((item) => (
             <div className={"card w-96 shadow-xl"}>
               <figure>
-                <img className="h-64" src={item.photoUrl} alt="Shoes" />
+                <img className="h-64" src={item.photoUrl} alt="" />
               </figure>
 
               <div className="card-body  items-center ">

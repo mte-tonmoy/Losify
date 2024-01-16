@@ -23,7 +23,51 @@ const Entry = () => {
     setItem(findItem)
   }, [allToys])
 
-  // console.log(item)
+
+  const authentication = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const user_name = form.user_name.value;
+    const user_email = user?.email;
+    const item_name = form.item_name.value;
+    const inside = form.inside.value;
+    const size = form.size.value;
+    const brand = form.brand.value;
+    const description = form.description.value;
+
+    const itemData = {
+      user_name,
+      user_email,
+      item_name,
+      inside,
+      size,
+      brand,
+      description,
+    };
+    console.log(itemData);
+
+    // fetch("https://server-tau-teal.vercel.app/additem", {
+    //   method: "POST",
+    //   headers: {
+    //     "content-type": "application/json",
+    //   },
+    //   body: JSON.stringify(itemData),
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     console.log(data);
+    //     if (data.insertedId) {
+    //       Swal.fire({
+    //         position: "top-end",
+    //         icon: "success",
+    //         title: "Item added successfully",
+    //         showConfirmButton: false,
+    //         timer: 1500
+    //       });
+    //       navigate('/item')
+    //     }
+    //   });
+  };
 
  
 
@@ -36,7 +80,7 @@ const Entry = () => {
           <Lottie className="w-3/4" animationData={authentications} loop={true} />
           <div>
 
-            <form>
+            <form onSubmit={authentication}>
               <div className="space-y-12">
                 <div className="border-b border-gray-900/10 pb-12">
                   <h2 className="text-base font-semibold leading-7 text-gray-900">
@@ -57,7 +101,7 @@ const Entry = () => {
                       <div className="mt-2">
                         <input
                           type="text"
-                          name="first_name"
+                          name="user_name"
                           id="first-name"
                           autoComplete="given-name"
                           defaultValue={user?.displayName}
@@ -76,7 +120,7 @@ const Entry = () => {
                       <div className="mt-2">
                         <input
                           type="text"
-                          name="last-name"
+                          name="user_email"
                           id="last-name"
                           autoComplete="family-name"
                           defaultValue={user?.email}
@@ -95,7 +139,7 @@ const Entry = () => {
                       <div className="mt-2">
                         <input
                           id="email"
-                          name="email"
+                          name="item_name"
                           type="text"
                           autoComplete="email"
                           defaultValue={item?.itemName}
@@ -152,7 +196,7 @@ const Entry = () => {
                       <div className="mt-2">
                         <input
                           type="text"
-                          name="street-address"
+                          name="inside"
                           id="street-address"
                           autoComplete="street-address"
                           className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 p-5"
@@ -170,7 +214,7 @@ const Entry = () => {
                       <div className="mt-2">
                         <input
                           type="text"
-                          name="city"
+                          name="size"
                           id="city"
                           autoComplete="address-level2"
                           className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -206,7 +250,7 @@ const Entry = () => {
                       <div className="mt-2">
                         <input
                           type="text"
-                          name="postal-code"
+                          name="brand"
                           id="postal-code"
                           autoComplete="postal-code"
                           className="block w-full rounded-md border-0 py-1.5 text-gray-900  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
