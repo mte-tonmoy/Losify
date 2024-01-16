@@ -27,7 +27,7 @@ const Upload = () => {
     };
     console.log(itemData);
 
-    fetch("http://localhost:5000/additem", {
+    fetch("https://server-tau-teal.vercel.app/additem", {
       method: "POST",
       headers: {
         "content-type": "application/json",

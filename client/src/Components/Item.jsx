@@ -6,7 +6,7 @@ const Item = () => {
   const [allToys, setAllToys] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/allitem")
+    fetch("https://server-tau-teal.vercel.app/allitem")
       .then((res) => res.json())
       .then((data) => setAllToys(data));
   });
@@ -41,6 +41,7 @@ const Item = () => {
                   <p className="font-semibold">Phone Nubmer     : {item.phoneNum}</p>
                   <p className="font-semibold">Item Description : {item.description}
                   </p>
+                  <button className="btn btn-active btn-primary text-white my-5">Request</button>
                 </div>
               </div>
             </div>

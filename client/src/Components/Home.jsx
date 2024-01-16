@@ -1,5 +1,6 @@
 import React from 'react';
 import {FireIcon } from '@heroicons/react/24/solid'
+import { Link } from "react-router-dom";
 
 const Home = () => {
     return (
@@ -13,7 +14,7 @@ const Home = () => {
         <p className='text-justify my-5 text-gray-700'>Welcome to the new online depository for missing items and people. Lostify’s global platform makes it easy to find what – or whoever –you’ve lost.</p>
         <div className="card-actions justify-end">
           
-        <button className="btn btn-primary text-white">Sign up now, its free!</button>
+       <Link to='signup'> <button className="btn btn-primary text-white">Sign up now, its free!</button></Link>
         </div>
        
     </div>

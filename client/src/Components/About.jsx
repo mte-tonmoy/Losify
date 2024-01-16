@@ -18,7 +18,7 @@ const About = () => {
 
 <div className="card my-10 w-full bg-base-100 shadow-2xl">
   <div className="card-body">
-    <h2 className="card-title">We have a vision: to reunite the world! ></h2>
+    <h2 className="card-title">We have a vision: to reunite the world! </h2>
     <p className='text-justify'>And so, we created Lostify to help you find that elusive reunion. While we cannot guarantee that you’ll find what you seek, we can say with confidence that our ever-growing, compassionate global community will do all we can to give your search a happy ending.
 
 On Lostify, you can report and find:</p>

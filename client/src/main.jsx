@@ -14,6 +14,7 @@ import Upload_Item from './Components/Upload.jsx'
 import Upload from './Components/Upload.jsx'
 import AuthProvider from '../Provider/AuthProvider.jsx'
 import PrivateRoute from './Components/PrivateRoute.jsx'
+import Entry from './Components/Entry.jsx'
 
 const router = createBrowserRouter([
   {
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
         element:<Item/>,
       },
       {
+        path:'entry',
+        element:<Entry/>,
+      },
+      {
         path:'upload',
         element:(
           <PrivateRoute>
@@ -56,6 +61,7 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+     
 
   ]
   },
