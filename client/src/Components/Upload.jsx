@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
-
+import Swal from 'sweetalert2'
+import { useNavigate } from "react-router-dom";
 
 const Upload = () => {
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleAddToyData = (event) => {
     event.preventDefault();
@@ -38,7 +40,14 @@ const Upload = () => {
       .then((data) => {
         console.log(data);
         if (data.insertedId) {
-          alert("Item add successfully");
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Item added successfully",
+            showConfirmButton: false,
+            timer: 1500
+          });
+          navigate('/item')
         }
       });
   };

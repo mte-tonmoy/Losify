@@ -1,13 +1,14 @@
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getAuth, updateProfile } from "firebase/auth";
 import { AuthContext } from "../../Provider/AuthProvider";
 
 
 
 const SignUp = () => {
-    const { createUser } = useContext(AuthContext);
+    const { createUser, googlePopup } = useContext(AuthContext);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
   const auth = getAuth();
   const handleSignUp = (event) => {
     event.preventDefault();
@@ -36,12 +37,26 @@ const SignUp = () => {
        })
          .then(() => {
           //  console.log(user);
+          navigate('/item')
          })
          .catch((error) => {
            setError(error.massage);
          });
      };
     
+  };
+
+  const handleGoogleSignIn = () => {
+    googlePopup()
+      .then((result) => {
+        const loggedInUser = result.user;
+        console.log(loggedInUser);
+        setUser(loggedInUser);
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        console.log("error", error.message);
+      });
   };
   return (
     <div className="hero min-h-screen ">

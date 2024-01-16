@@ -35,13 +35,14 @@ const Item = () => {
 
               <div className="card-body  items-center ">
                 <div className="">
+                  <p className="font-semibold">Category        : {item.category}</p>
                   <p className="font-semibold">Item Name        : {item.itemName}</p>
                   <p className="font-semibold">User Name        : {item.userName}</p>
                   <p className="font-semibold">User Email       : {item.userEmail}</p>
                   <p className="font-semibold">Phone Nubmer     : {item.phoneNum}</p>
                   <p className="font-semibold">Item Description : {item.description}
                   </p>
-                  <button className="btn btn-active btn-primary text-white my-5">Request</button>
+                  <Link to={`/entry/${item?._id}`}><button className="btn btn-active btn-primary text-white my-5">Request</button></Link>
                 </div>
               </div>
             </div>

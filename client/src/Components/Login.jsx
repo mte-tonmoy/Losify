@@ -9,7 +9,7 @@ const Login = () => {
   const location = useLocation();
   const [error, setError] = useState("");
   console.log("login page location", location);
-  const from = location.state?.from?.pathname || "/";
+  const from = location.state?.from?.pathname || "/item";
 
   const handleLogin = (event) => {
     event.preventDefault();
@@ -36,6 +36,7 @@ const Login = () => {
         const loggedInUser = result.user;
         console.log(loggedInUser);
         setUser(loggedInUser);
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         console.log("error", error.message);

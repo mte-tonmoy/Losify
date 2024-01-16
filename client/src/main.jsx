@@ -46,11 +46,11 @@ const router = createBrowserRouter([
         element:<Login/>,
       },
       {
-        path:'item',
+        path:'/item',
         element:<Item/>,
       },
       {
-        path:'entry',
+        path:'/entry/:id',
         element:<Entry/>,
       },
       {

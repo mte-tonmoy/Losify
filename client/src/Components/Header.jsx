@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import {
   CubeTransparentIcon,
   Bars3BottomRightIcon,
@@ -10,14 +10,16 @@ import { AuthContext } from '../../Provider/AuthProvider'
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const { user, logOut } = useContext(AuthContext);
+  const navigate = useNavigate();
   
   const handleLogOut = () => {
     logOut()
       .then()
       .catch((error) => console.log(error));
+      navigate('/')
   };
   return (
-    <div className='bg-gray-100 px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 rounded-full my-10'>
+    <div className='bg-gray-100 px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-[90vw] md:px-24 lg:px-8 rounded-full my-8'>
 
 
       <div className='relative flex items-center justify-between'>
