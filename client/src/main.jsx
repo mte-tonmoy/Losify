@@ -16,6 +16,7 @@ import AuthProvider from '../Provider/AuthProvider.jsx'
 import PrivateRoute from './Components/PrivateRoute.jsx'
 import Entry from './Components/Entry.jsx'
 import Manage from './Components/ManageDataTable.jsx'
+import UpdateItem from './Components/UpdateItem.jsx'
 
 
 const router = createBrowserRouter([
@@ -56,8 +57,12 @@ const router = createBrowserRouter([
         element:<Entry/>,
       },
       {
-        path:'manage',
+        path:'/manage',
         element:<Manage/>,
+      },
+      {
+        path:'/updateitem/:id',
+        element:<UpdateItem/>,
       },
       {
         path:'upload',

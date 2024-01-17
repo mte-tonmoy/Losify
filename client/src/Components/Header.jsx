@@ -67,6 +67,14 @@ const Header = () => {
               Items
             </NavLink>
           </li>
+          <li>
+            <NavLink
+              to='/manage'
+              className={({ isActive }) => (isActive ? 'text-primary' : 'default')}
+            >
+              Manage My Item
+            </NavLink>
+          </li>
           {user ? (
         <>
           <li>
