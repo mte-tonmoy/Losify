@@ -51,7 +51,7 @@ const ManageItems = ({ myItem, setMyItem }) => {
                 <div className="overflow-x-auto mt-8 rounded-tl-2xl rounded-tr-2xl">
                     <table className="table w-full rounded-tl-2xl rounded-tr-2xl">
                         {/* head */}
-                        <thead className="bg-[#D1A054] h-[4.5rem] rounded-tl-2xl rounded-tr-2xl text-white font-semibold">
+                        <thead className="bg-primary h-[4.5rem] rounded-tl-2xl rounded-tr-2xl text-white font-semibold">
                             <tr>
                                 <th>
 
@@ -84,10 +84,10 @@ const ManageItems = ({ myItem, setMyItem }) => {
 
                                     </td>
                                     <td>
-                                        <Link to={`/updateitem/${item._id}`}> <button className="btn w-[3.1rem] h-[3.1rem] rounded-md bg-[#D1A054] btn-neutral border-none btn-xs"><img src={edit} alt="" /></button></Link>
+                                        <Link to={`/updateitem/${item._id}`}> <button className="btn w-[3.1rem] h-[3.1rem] rounded-md bg-primary btn-neutral border-none btn-xs"><img src={edit} alt="" /></button></Link>
                                     </td>
                                     <td>
-                                        <button onClick={() => handleDeleteItem(item)} className="btn w-[3.1rem] text-red-800 h-[3.1rem] rounded-md bg-[#D1A054] btn-neutral border-none btn-xs"><img src={deletedicon} alt="" /></button>
+                                        <button onClick={() => handleDeleteItem(item)} className="btn w-[3.1rem] text-red-800 h-[3.1rem] rounded-md bg-[#d33] btn-neutral border-none btn-xs"><img src={deletedicon} alt="" /></button>
                                     </td>
                                 </tr>)
                             }

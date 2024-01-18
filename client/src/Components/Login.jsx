@@ -108,7 +108,7 @@ const Login = () => {
               </button>
             </div>
             <p className="my-4 text-center">
-              New to Movies Toy{" "}
+              {" "}
               <Link className="text-primary font-bold" to="/signup">
                 Sign Up
               </Link>
