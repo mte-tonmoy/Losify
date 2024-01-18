@@ -17,71 +17,80 @@ import PrivateRoute from './Components/PrivateRoute.jsx'
 import Entry from './Components/Entry.jsx'
 import Manage from './Components/ManageDataTable.jsx'
 import UpdateItem from './Components/UpdateItem.jsx'
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
 
 
 const router = createBrowserRouter([
   {
-    path:'/',
-    element:<App/>,
-    children:[
+    path: '/',
+    element: <App />,
+    children: [
       {
-        path:'/',
-        element:<Home/>,
+        path: '/',
+        element: <Home />,
       },
       {
-        path:'about',
-        element:<About/>,
+        path: 'about',
+        element: <About />,
       },
       {
-        path:'header',
-        element:<Header/>,
+        path: 'header',
+        element: <Header />,
       },
       {
-        path:'contact',
-        element:<Contct/>,
+        path: 'contact',
+        element: <Contct />,
       },
       {
-        path:'signup',
-        element:<SignUp/>,
+        path: 'signup',
+        element: <SignUp />,
       },
       {
-        path:'login',
-        element:<Login/>,
+        path: 'login',
+        element: <Login />,
       },
       {
-        path:'/item',
-        element:<Item/>,
+        path: '/item',
+        element: <Item />,
       },
       {
-        path:'/entry/:id',
-        element:<Entry/>,
+        path: '/entry/:id',
+        element: <Entry />,
       },
       {
-        path:'/manage',
-        element:<Manage/>,
+        path: '/manage',
+        element: <Manage />,
       },
       {
-        path:'/updateitem/:id',
-        element:<UpdateItem/>,
+        path: '/updateitem/:id',
+        element: <UpdateItem />,
       },
       {
-        path:'upload',
-        element:(
+        path: 'upload',
+        element: (
           <PrivateRoute>
-            <Upload/>
+            <Upload />
           </PrivateRoute>
         ),
       },
-     
 
-  ]
+
+    ]
   },
 ])
-
+const queryClient = new QueryClient()
 ReactDOM.createRoot(document.getElementById('root')).render(
-<React.StrictMode>
-  <AuthProvider>
-  <RouterProvider router={router} />
-  </AuthProvider>
-</React.StrictMode>
+  <React.StrictMode>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
+    </QueryClientProvider>
+  </React.StrictMode>
 )

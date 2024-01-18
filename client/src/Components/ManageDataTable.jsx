@@ -13,15 +13,10 @@ const ManageDataTable = () => {
             .then(item => setItem(item))
     }, [])
 
-    console.log(email)
-
     useEffect(()=>{
         const filtermydata = item.filter(items=>items.userEmail===email)
         setMyItem(filtermydata)
     },[item, email])
-
-console.log(myItem)
-
 
     return (
         <div className='mx-auto w-[80vw] rounded-lg min-h-screen'>
@@ -32,7 +27,7 @@ console.log(myItem)
                 </div>
                     :
 
-                    <div className=''><ManageItems myItem={myItem}></ManageItems></div>
+                    <div className=''><ManageItems myItem={myItem} setMyItem={setMyItem}></ManageItems></div>
             }
         </div>
     );

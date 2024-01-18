@@ -6,7 +6,7 @@ import deletedicon from "../assets/delete.svg"
 import axios from "axios";
 
 
-const ManageItems = ({ myItem }) => {
+const ManageItems = ({ myItem, setMyItem }) => {
 
     const handleDeleteItem = (item) => {
 
@@ -32,6 +32,7 @@ const ManageItems = ({ myItem }) => {
                                 'Your food has been deleted.',
                                 'success'
                             )
+                            setMyItem(myItem)
                         }
                     })
 
