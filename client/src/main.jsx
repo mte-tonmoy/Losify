@@ -61,7 +61,7 @@ const router = createBrowserRouter([
         element:<Manage/>,
       },
       {
-        path:'/updateitem/:id',
+        path:'/updateitem',
         element:<UpdateItem/>,
       },
       {

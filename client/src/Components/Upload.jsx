@@ -146,7 +146,7 @@ const Upload = () => {
 
         <div className="form-control mt-8 mb-16">
           <input
-            className="btn btn-primary btn-block"
+            className="btn btn-primary btn-block text-white"
             type="submit"
             value="Submit"
           />
