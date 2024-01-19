@@ -135,7 +135,7 @@ const Upload = () => {
 
         <div className="form-control mt-5">
           <label className="label">
-            <span className="label-text">Toy description</span>
+            <span className="label-text">Description</span>
           </label>
           <textarea
             name="description"
