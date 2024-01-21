@@ -30,6 +30,7 @@ import {
   QueryClientProvider,
 } from "@tanstack/react-query";
 import Reqest from "./Components/Reqest.jsx";
+import RequestDetails from "./Components/RequestDetails.jsx";
 
 const router = createBrowserRouter([
   {
@@ -75,6 +76,10 @@ const router = createBrowserRouter([
       {
         path: "/manage",
         element: <Manage />,
+      },
+      {
+        path: "/requestdetails/:id",
+        element: <RequestDetails />,
       },
 
       {

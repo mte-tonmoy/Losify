@@ -5,17 +5,22 @@ import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
 import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
 import Swal from 'sweetalert2'
+import axios from "axios";
+
+const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`
 
 
 const Entry = () => {
   const [allToys, setAllToys] = useState([]);
   const [item, setItem] = useState(null);
   const { user } = useContext(AuthContext);
+  const [image, setImage] = useState(null);
   const { id } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("https://server-tau-teal.vercel.app/allitem")
+    fetch("http://localhost:5000/allitem")
       .then((res) => res.json())
       .then((data) => setAllToys(data));
   });
@@ -25,26 +30,58 @@ const Entry = () => {
     setItem(findItem)
   }, [allToys])
 
+  // console.log(item)
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    setImage(file);
+  };
 
-  const authentication = (event) => {
+  // console.log(image)
+  const authentication = async (event) => {
     event.preventDefault();
     const form = event.target;
+
+    const imageFile = new FormData();
+    imageFile.append('image', image);
+
+    const res = await axios.post(image_hosting_api, imageFile, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+
+    const imageUrl = res.data.data.url;
     const user_name = form.user_name.value;
     const user_email = user?.email;
+    const contact = form.contact.value;
     const item_name = form.item_name.value;
     const inside = form.inside.value;
     const size = form.size.value;
     const brand = form.brand.value;
+    const itemcolor = form.itemcolor.value;
     const description = form.description.value;
+    const status = "Pending";
+    const finder_name = item?.userName;
+    const finder_email = item?.userEmail;
+    const finder_contact = item?.phoneNum;
+    const itemId = id;
 
     const itemData = {
       user_name,
       user_email,
+      contact,
       item_name,
       inside,
       size,
       brand,
       description,
+      finder_name,
+      finder_email,
+      finder_contact,
+      itemId,
+      status,
+      itemcolor,
+      imageUrl
     };
     console.log(itemData);
 
@@ -70,8 +107,6 @@ const Entry = () => {
         }
       });
   };
-
- 
 
 
   return (
@@ -107,7 +142,7 @@ const Entry = () => {
                           id="first-name"
                           autoComplete="given-name"
                           defaultValue={user?.displayName}
-                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          className="block pl-3 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                         />
                       </div>
                     </div>
@@ -126,10 +161,28 @@ const Entry = () => {
                           id="last-name"
                           autoComplete="family-name"
                           defaultValue={user?.email}
-                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          className="block pl-3 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                         />
                       </div>
                     </div>
+
+                    <div className="sm:col-span-4">
+                      <label
+                        htmlFor="email"
+                        className="block text-sm font-medium leading-6 text-gray-900"
+                      >
+                        Contact Number
+                      </label>
+                      <div className="mt-2">
+                        <input
+                          name="contact"
+                          type="number"
+                          placeholder="Enter your number"
+                          className="block w-full pl-3 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        />
+                      </div>
+                    </div>
+
 
                     <div className="sm:col-span-4">
                       <label
@@ -145,47 +198,25 @@ const Entry = () => {
                           type="text"
                           autoComplete="email"
                           defaultValue={item?.itemName}
-                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          className="block w-full pl-3 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                         />
                       </div>
                     </div>
 
+                    {/* here input the image */}
 
-
-
-                    <div className="col-span-full">
-                      <label
-                        htmlFor="cover-photo"
-                        className="block text-sm font-medium leading-6 text-gray-900"
-                      >
-                        Upload Item photo
+                    <div className="mt-4">
+                      <label htmlFor="image" className="block text-sm font-medium leading-6 text-gray-900">
+                        Upload Image
                       </label>
-                      <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
-                        <div className="text-center">
-                          <PhotoIcon
-                            className="mx-auto h-12 w-12 text-gray-300"
-                            aria-hidden="true"
-                          />
-                          <div className="mt-4 flex text-sm leading-6 text-gray-600">
-                            <label
-                              htmlFor="file-upload"
-                              className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
-                            >
-                              <span>Upload a file</span>
-                              <input
-                                id="file-upload"
-                                name="file-upload"
-                                type="file"
-                                className="sr-only"
-                              />
-                            </label>
-                            <p className="pl-1">or drag and drop</p>
-                          </div>
-                          <p className="text-xs leading-5 text-gray-600">
-                            PNG, JPG, GIF up to 10MB
-                          </p>
-                        </div>
-                      </div>
+                      <input
+                        type="file"
+                        id="image"
+                        name="image"
+                        accept="image/*"
+                        onChange={handleImageChange}
+                        className="mt-2"
+                      />
                     </div>
 
                     <div className="col-span-full">
@@ -216,9 +247,7 @@ const Entry = () => {
                       <div className="mt-2">
                         <input
                           type="text"
-                          name="size"
-                          id="city"
-                          autoComplete="address-level2"
+                          name="itemcolor"
                           className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                         />
                       </div>
@@ -234,8 +263,7 @@ const Entry = () => {
                       <div className="mt-2">
                         <input
                           type="text"
-                          name="region"
-                          id="region"
+                          name="size"
                           autoComplete="address-level1"
                           className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                         />
@@ -308,5 +336,4 @@ const Entry = () => {
     </div>
   );
 };
-
 export default Entry;

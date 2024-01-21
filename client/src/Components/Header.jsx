@@ -19,7 +19,7 @@ const Header = () => {
     navigate("/");
   };
   return (
-    <div className="bg-gray-100 px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-[90vw] md:px-24 lg:px-8 rounded-full my-8">
+    <div className="bg-gray-100 px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-[90vw] md:px-24 lg:px-8 rounded-full my-4">
       <div className="relative flex items-center justify-between">
         {/* Logo Section */}
         <Link to="/" className="inline-flex items-center">
@@ -42,27 +42,9 @@ const Header = () => {
             </NavLink>
           </li>
 
-          <li>
-            <NavLink
-              to="/about"
-              className={({ isActive }) =>
-                isActive ? "text-primary" : "default"
-              }
-            >
-              About us
-            </NavLink>
-          </li>
+        
 
-          <li>
-            <NavLink
-              to="/contact"
-              className={({ isActive }) =>
-                isActive ? "text-primary" : "default"
-              }
-            >
-              Contact
-            </NavLink>
-          </li>
+          
           <li>
             <NavLink
               to="/item"
@@ -91,6 +73,16 @@ const Header = () => {
               }
             >
               Requested Items
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/contact"
+              className={({ isActive }) =>
+                isActive ? "text-primary" : "default"
+              }
+            >
+              Contact
             </NavLink>
           </li>
           {user ? (

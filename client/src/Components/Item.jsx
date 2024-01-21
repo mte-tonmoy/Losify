@@ -5,31 +5,32 @@ import { AuthContext } from "../../Provider/AuthProvider";
 
 const Item = () => {
   const [allToys, setAllToys] = useState([]);
+  // const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // setLoading(true);
     fetch("https://server-tau-teal.vercel.app/allitem")
       .then((res) => res.json())
-      .then((data) => setAllToys(data));
+      .then((data) => {
+        setAllToys(data);
+        // setLoading(false)
+      });
   });
   return (
-    <div>
+    <div className="min-h-screen">
       <Link to="/upload">
         <button className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg mx-5 my-5 bg-primary text-white">
-          Found Item
+          Post Item
         </button>
       </Link>
-      <Link to="/upload">
-        <button className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg my-10 bg-primary text-white">
-          Lost Item
-        </button>
-      </Link>
+      
 
       <div>
         <h2 className="text-5xl my-8">All Item Data</h2>
 
-        <div className="grid md:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 justify-items-center items-center ">
           {allToys.map((item) => (
-            <div className={"card w-96 shadow-xl"}>
+            <div key={item?._id} className={"card w-96 shadow-md my-8"}>
               <figure>
                 <img className="h-64" src={item.photoUrl} alt="" />
               </figure>

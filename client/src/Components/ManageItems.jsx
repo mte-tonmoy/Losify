@@ -29,7 +29,7 @@ const ManageItems = ({ myItem, setMyItem }) => {
                         if (data.data.deletedCount > 0) {
                             Swal.fire(
                                 'Deleted!',
-                                'Your food has been deleted.',
+                                'Your Item has been deleted.',
                                 'success'
                             )
                             setMyItem(myItem)
@@ -60,6 +60,7 @@ const ManageItems = ({ myItem, setMyItem }) => {
                                 <th>Item Name</th>
                                 <th>Update</th>
                                 <th>Delete</th>
+                                <th>Request</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -88,6 +89,9 @@ const ManageItems = ({ myItem, setMyItem }) => {
                                     </td>
                                     <td>
                                         <button onClick={() => handleDeleteItem(item)} className="btn w-[3.1rem] text-red-800 h-[3.1rem] rounded-md bg-[#d33] btn-neutral border-none btn-xs"><img src={deletedicon} alt="" /></button>
+                                    </td>
+                                    <td>
+                                       <Link to={`/requestdetails/${item?._id}`}> <button className="btn w-[6.1rem] text-white h-[3.1rem] rounded-md bg-[#d33] btn-neutral border-none btn-xs">View Details</button></Link>
                                     </td>
                                 </tr>)
                             }
