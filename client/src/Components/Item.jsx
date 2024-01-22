@@ -2,18 +2,18 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import AllItemRow from "./AllItemRow";
 import { AuthContext } from "../../Provider/AuthProvider";
+import loadinggif from "../assets/loading.gif"
 
 const Item = () => {
   const [allToys, setAllToys] = useState([]);
-  // const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // setLoading(true);
     fetch("https://server-tau-teal.vercel.app/allitem")
       .then((res) => res.json())
       .then((data) => {
         setAllToys(data);
-        // setLoading(false)
+        setLoading(false)
       });
   });
   return (
@@ -23,9 +23,8 @@ const Item = () => {
           Post Item
         </button>
       </Link>
-      
-
-      <div>
+      {
+        loading ? <img className="mx-auto" src={loadinggif} alt="loading" /> : <div>
         <h2 className="text-5xl my-8">All Item Data</h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 justify-items-center items-center ">
@@ -55,6 +54,10 @@ const Item = () => {
               <AllItemRow key={allToy._id} allToy={allToy}></AllItemRow>
             ))} */}
       </div>
+      }
+      
+
+      
     </div>
   );
 };

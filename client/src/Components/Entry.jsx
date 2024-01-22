@@ -209,7 +209,7 @@ const Entry = () => {
                       <label htmlFor="image" className="block text-sm font-medium leading-6 text-gray-900">
                         Upload Image
                       </label>
-                      <input
+                      <input required
                         type="file"
                         id="image"
                         name="image"

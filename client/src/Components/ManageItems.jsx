@@ -32,7 +32,8 @@ const ManageItems = ({ myItem, setMyItem }) => {
                                 'Your Item has been deleted.',
                                 'success'
                             )
-                            setMyItem(myItem)
+                            const remaininng = myItem.filter(items=>items._id != item?._id)
+                            setMyItem(remaininng);
                         }
                     })
 
