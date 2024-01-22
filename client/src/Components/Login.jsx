@@ -4,12 +4,14 @@ import { FaGoogle } from "react-icons/fa";
 import { AuthContext } from "../../Provider/AuthProvider";
 
 const Login = () => {
-  const { signIn, googlePopup, setUser } = useContext(AuthContext);
+  const { signIn, googlePopup, setUser, user } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
   const [error, setError] = useState("");
   console.log("login page location", location);
   const from = location.state?.from?.pathname || "/item";
+
+  // console.log(user.emailVerified)
 
   const handleLogin = (event) => {
     event.preventDefault();

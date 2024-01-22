@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { getAuth, updateProfile } from "firebase/auth";
 import { AuthContext } from "../../Provider/AuthProvider";
 import axios from "axios";
+import Swal from "sweetalert2";
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`
 
@@ -54,13 +55,25 @@ const SignUp = () => {
       })
         .then(() => {
           //  console.log(user);
-          navigate('/item')
+          // navigate('/item')
         })
         .catch((error) => {
           setError(error.massage);
         });
     };
-
+    
+    Swal.fire({
+      title: "Check Your Email",
+      text: "Please Verify your email address",
+      icon: "warning",
+      showCancelButton: false,
+      confirmButtonColor: "#3085d6",
+      confirmButtonText: "Ok!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        navigate('/login')
+      }
+    });
   };
 
   const handleGoogleSignIn = () => {

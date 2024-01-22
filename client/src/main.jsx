@@ -62,7 +62,7 @@ const router = createBrowserRouter([
         element: <Reqest />,
       },
       {
-        path: "login",
+        path: "/login",
         element: <Login />,
       },
       {
@@ -71,20 +71,24 @@ const router = createBrowserRouter([
       },
       {
         path: "/entry/:id",
-        element: <Entry />,
+        element: <PrivateRoute>
+          <Entry />
+        </PrivateRoute>,
       },
       {
         path: "/manage",
-        element: <Manage />,
+        element: <PrivateRoute>
+          <Manage />
+        </PrivateRoute>,
       },
       {
         path: "/requestdetails/:id",
-        element: <RequestDetails />,
+        element: <PrivateRoute><RequestDetails /></PrivateRoute>,
       },
 
       {
         path: "/updateitem/:id",
-        element: <UpdateItem />,
+        element: <PrivateRoute><UpdateItem /></PrivateRoute>,
       },
       {
         path: "upload",

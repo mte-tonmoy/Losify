@@ -30,6 +30,8 @@ const AuthProvider = ({ children }) => {
     // Send email verification
     await sendEmailVerification(userCredential.user);
 
+    await signOut(auth);
+
     return userCredential;
   };
 
@@ -50,16 +52,28 @@ const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (loggedUser) => {
+    const unsubscribe = onAuthStateChanged(auth, async (loggedUser) => {
       console.log("logged in user inside auth state observer", loggedUser);
+  
+      if (loggedUser) {
+        if (loggedUser.emailVerified) {
+          // User is logged in and email is verified, redirect to home page
+          // navigate('/home'); // Replace with your routing logic
+        } else {
+          // User is logged in, but email is not verified
+          // Handle accordingly (show a message, redirect to a verification page, etc.)
+        }
+      }
+  
       setUser(loggedUser);
       setLoading(false);
     });
-
+  
     return () => {
       unsubscribe();
     };
   }, []);
+  
 
   const authInfo = {
     user,
