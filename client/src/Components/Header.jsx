@@ -104,7 +104,7 @@ const Header = () => {
                 className="w-10 rounded-full tooltip tooltip-left"
                 data-tip={user.displayName}
               >
-                <img className="w-10 rounded-full" src={user.photoURL} />
+                <img className="w-12 h-10 rounded-[100%] border-primary border-2" src={user.photoURL} />
               </div>
             )}
           </div>

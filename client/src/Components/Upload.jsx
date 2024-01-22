@@ -1,15 +1,36 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import Swal from 'sweetalert2'
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`
+
 
 const Upload = () => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [image, setImage] = useState(null);
 
-  const handleAddToyData = (event) => {
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    setImage(file);
+  };
+
+
+  const handleAddToyData = async (event) => {
     event.preventDefault();
     const form = event.target;
+    const imageFile = new FormData();
+    imageFile.append('image', image);
+
+    const res = await axios.post(image_hosting_api, imageFile, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+
+    const imageUrl = res.data.data.url;
     const itemName = form.toyName.value;
     const userName = user?.displayName;
     const userEmail = user?.email;
@@ -22,7 +43,7 @@ const Upload = () => {
       itemName,
       userName,
       userEmail,
-      photoUrl,
+      imageUrl,
       category,
       phoneNum,
       description,
@@ -95,7 +116,7 @@ const Upload = () => {
             />
           </div>
 
-          <div className="form-control">
+          <div className="form-control hidden">
             <label className="label">
               <span className="label-text">Picture URL of Item</span>
             </label>
@@ -107,6 +128,22 @@ const Upload = () => {
               className="input input-bordered"
             />
           </div>
+
+          <div className="mt-4">
+            <label htmlFor="image" className="block text-sm font-medium leading-6 text-gray-900">
+              Upload Image
+            </label>
+            <input required
+              type="file"
+              id="image"
+              name="image"
+              accept="image/*"
+              onChange={handleImageChange}
+              className="mt-2"
+            />
+          </div>
+
+
           <div className="form-control">
             <label className="label">
               <span className="label-text">Category</span>
@@ -114,11 +151,11 @@ const Upload = () => {
             <select name="category" className="select select-bordered">
               <option>Found Item</option>
               <option>Lost Item</option>
-              
+
             </select>
           </div>
-          
-          
+
+
           <div className="form-control">
             <label className="label">
               <span className="label-text">Phone Number</span>

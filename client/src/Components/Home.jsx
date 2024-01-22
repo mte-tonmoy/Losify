@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FireIcon } from '@heroicons/react/24/solid'
 import { Link } from "react-router-dom";
 import {CheckBadgeIcon } from '@heroicons/react/24/solid'
 import { BeakerIcon } from '@heroicons/react/24/solid'
 const Home = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+}, []);
   return (
     <div>
       <div className='content-center'>

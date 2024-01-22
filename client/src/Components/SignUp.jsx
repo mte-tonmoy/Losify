@@ -2,48 +2,65 @@ import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { getAuth, updateProfile } from "firebase/auth";
 import { AuthContext } from "../../Provider/AuthProvider";
-
+import axios from "axios";
+const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`
 
 
 const SignUp = () => {
-    const { createUser, googlePopup } = useContext(AuthContext);
+  const { createUser, googlePopup } = useContext(AuthContext);
   const [error, setError] = useState("");
+  const [image, setImage] = useState(null);
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    setImage(file);
+  };
   const navigate = useNavigate();
   const auth = getAuth();
-  const handleSignUp = (event) => {
+  const handleSignUp = async (event) => {
     event.preventDefault();
     const form = event.target;
+    const imageFile = new FormData();
+    imageFile.append('image', image);
+
+    const res = await axios.post(image_hosting_api, imageFile, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+
+    const imageUrl = res.data.data.url;
     const name = form.name.value;
     const photo = form.photo.value;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(name, email, password,photo);
+    console.log(name, email, password, photo);
 
-      createUser(email, password)
-        .then((result) => {
-          const createdUser = result.user;
-          console.log(createdUser);
-          updateUserData( name, photo);
-        })
-        .catch((error) => {
-          console.log(error);
-          setError(error.message);
-        });
-      
-     const updateUserData = ( name, photo) => {
-       updateProfile(auth.currentUser, {
-         displayName: name,
-         photoURL: photo,
-       })
-         .then(() => {
+    createUser(email, password)
+      .then((result) => {
+        const createdUser = result.user;
+        console.log(createdUser);
+        updateUserData(name, photo);
+      })
+      .catch((error) => {
+        console.log(error);
+        setError(error.message);
+      });
+
+    const updateUserData = (name, photo) => {
+      updateProfile(auth.currentUser, {
+        displayName: name,
+        photoURL: imageUrl,
+      })
+        .then(() => {
           //  console.log(user);
           navigate('/item')
-         })
-         .catch((error) => {
-           setError(error.massage);
-         });
-     };
-    
+        })
+        .catch((error) => {
+          setError(error.massage);
+        });
+    };
+
   };
 
   const handleGoogleSignIn = () => {
@@ -84,7 +101,7 @@ const SignUp = () => {
                   className="input input-bordered"
                 />
               </div>
-              <div className="form-control">
+              <div className="form-control hidden">
                 <label className="label">
                   <span className="label-text">Photo Url</span>
                 </label>
@@ -95,6 +112,30 @@ const SignUp = () => {
                   className="input input-bordered"
                 />
               </div>
+
+
+
+
+              <div className="mt-4">
+                <label htmlFor="image" className="block text-sm font-medium leading-6 text-gray-900">
+                  Upload Image
+                </label>
+                <input required
+                  type="file"
+                  id="image"
+                  name="image"
+                  accept="image/*"
+                  onChange={handleImageChange}
+                  className="mt-2"
+                />
+              </div>
+
+
+
+
+
+
+
 
               <div className="form-control">
                 <label className="label">
@@ -137,8 +178,8 @@ const SignUp = () => {
               <Link className="text-blue-600 font-bold" to="/login">
                 Login
               </Link>
-                      </p>
-                      <p className="text-red-500">{ error}</p>
+            </p>
+            <p className="text-red-500">{error}</p>
           </div>
         </div>
       </div>
@@ -188,7 +229,7 @@ export default SignUp;
 // <Lottie animationData={signup} loop={true} />
 
 // </div>
-// </div> 
+// </div>
 // </div>
 //     </div>
 // );

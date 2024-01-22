@@ -5,6 +5,9 @@ import { AuthContext } from "../../Provider/AuthProvider";
 import loadinggif from "../assets/loading.gif"
 
 const Item = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+}, []);
   const [allToys, setAllToys] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -30,11 +33,11 @@ const Item = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 justify-items-center items-center ">
           {allToys.map((item) => (
             <div key={item?._id} className={"card w-96 shadow-md my-8"}>
-              <figure>
-                <img className="h-64" src={item.photoUrl} alt="" />
+              <figure className="rounded-xl">
+                <img className="h-64 w-full px-4 pt-4 rounded-xl" src={item.imageUrl} alt="" />
               </figure>
 
-              <div className="card-body  items-center ">
+              <div className=" px-4 pt-5  items-center ">
                 <div className="">
                   <p className="font-semibold">Category        : {item.category}</p>
                   <p className="font-semibold">Item Name        : {item.itemName}</p>
