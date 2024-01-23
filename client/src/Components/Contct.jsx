@@ -1,5 +1,6 @@
 import React, { useEffect, useRef} from 'react';
 import emailjs from '@emailjs/browser';
+import Swal from "sweetalert2";
 
 const Contct = () => {
 
@@ -13,6 +14,13 @@ const Contct = () => {
       .then((result) => {
           console.log(result.text);
           e.target.reset();
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Thank You for Reaching Out",
+            showConfirmButton: false,
+            timer: 1500
+          });
       }, (error) => {
           console.log(error.text);
       });

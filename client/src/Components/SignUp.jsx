@@ -56,6 +56,13 @@ const SignUp = () => {
       })
         .then(() => {
            console.log(user);
+           Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Sign up Successfully",
+            showConfirmButton: false,
+            timer: 1500
+          });
            navigate(from, { replace: true });
         })
         .catch((error) => {
