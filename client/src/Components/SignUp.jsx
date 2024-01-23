@@ -10,6 +10,7 @@ const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_ke
 
 const SignUp = () => {
   const { createUser, googlePopup } = useContext(AuthContext);
+  const from = location.state?.from?.pathname || "/item";
   const [error, setError] = useState("");
   const [image, setImage] = useState(null);
   const handleImageChange = (event) => {
@@ -54,26 +55,14 @@ const SignUp = () => {
         photoURL: imageUrl,
       })
         .then(() => {
-          //  console.log(user);
-          // navigate('/item')
+           console.log(user);
+           navigate(from, { replace: true });
         })
         .catch((error) => {
           setError(error.massage);
         });
     };
-    
-    Swal.fire({
-      title: "Check Your Email",
-      text: "Please Verify your email address",
-      icon: "warning",
-      showCancelButton: false,
-      confirmButtonColor: "#3085d6",
-      confirmButtonText: "Ok!"
-    }).then((result) => {
-      if (result.isConfirmed) {
-        navigate('/login')
-      }
-    });
+    navigate(from, { replace: true });
   };
 
   const handleGoogleSignIn = () => {

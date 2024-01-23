@@ -30,11 +30,11 @@ const Item = () => {
         loading ? <img className="mx-auto" src={loadinggif} alt="loading" /> : <div>
         <h2 className="text-5xl my-8 text-gray-700 text-center">All Item Data</h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center items-center gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-items-center items-center gap-10">
           {allToys.map((item) => (
-            <div key={item?._id} className={"card h-full w-96 shadow-md my-8 relative"}>
+            <div key={item?._id} className={" h-[32rem] w-[20rem] shadow-md my-8 relative rounded-xl"}>
               <figure className="rounded-xl">
-                <img className="object-cover px-5  rounded-xl" src={item.imageUrl} alt="" />
+                <img className="object-cover px-5 h-[15rem] w-full pt-5 rounded-xl" src={item.imageUrl} alt="" />
               </figure>
 
               <div className=" px-5 pt-5  items-center ">
