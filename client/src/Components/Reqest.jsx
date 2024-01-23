@@ -9,7 +9,7 @@ const Reqest = () => {
   const { user } = useContext(AuthContext);
   const email = user?.email;
   useEffect(() => {
-    fetch('http://localhost:5000/requestData')
+    fetch('https://server-dbqzrqfon-elite3.vercel.app/requestData')
       .then(res => res.json())
       .then(item => setItem(item))
   }, [])
@@ -33,7 +33,7 @@ const Reqest = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         // pass the item object as a property of the config object
-        axios.delete(`http://localhost:5000/requestData/${item._id}`, { data: item })
+        axios.delete(`https://server-dbqzrqfon-elite3.vercel.app/requestData/${item._id}`, { data: item })
           // .then(res=>res.json())
           .then(data => {
             // console.log(data.data);

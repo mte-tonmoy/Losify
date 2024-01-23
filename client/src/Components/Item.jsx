@@ -28,34 +28,33 @@ const Item = () => {
       </Link>
       {
         loading ? <img className="mx-auto" src={loadinggif} alt="loading" /> : <div>
-        <h2 className="text-5xl my-8">All Item Data</h2>
+        <h2 className="text-5xl my-8 text-gray-700 text-center">All Item Data</h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 justify-items-center items-center ">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center items-center gap-10">
           {allToys.map((item) => (
-            <div key={item?._id} className={"card w-96 shadow-md my-8"}>
+            <div key={item?._id} className={"card h-full w-96 shadow-md my-8 relative"}>
               <figure className="rounded-xl">
-                <img className="h-64 w-full px-4 pt-4 rounded-xl" src={item.imageUrl} alt="" />
+                <img className="object-cover px-5  rounded-xl" src={item.imageUrl} alt="" />
               </figure>
 
-              <div className=" px-4 pt-5  items-center ">
-                <div className="">
-                  <p className="font-semibold">Category        : {item.category}</p>
-                  <p className="font-semibold">Item Name        : {item.itemName}</p>
-                  <p className="font-semibold">User Name        : {item.userName}</p>
-                  <p className="font-semibold">User Email       : {item.userEmail}</p>
-                  <p className="font-semibold">Phone Nubmer     : {item.phoneNum}</p>
-                  <p className="font-semibold">Item Description : {item.description}
+              <div className=" px-5 pt-5  items-center ">
+                
+                  <p className="font-semibold text-gray-700">Category        : {item.category}</p>
+                  <p className="font-semibold text-gray-700">Item Name        : {item.itemName}</p>
+                  <p className="font-semibold text-gray-700">User Name        : {item.userName}</p>
+                  <p className="font-semibold text-gray-700">User Email       : {item.userEmail}</p>
+                  <p className="font-semibold text-gray-700">Phone Nubmer     : {item.phoneNum}</p>
+                  <p className="font-semibold text-gray-700 mb-5">Item Description : {item.description}
                   </p>
+                
+                
+              </div>
+              <div className=" absolute bottom-0 right-5">
                   <Link to={`/entry/${item?._id}`}><button className="btn btn-active btn-primary text-white my-5">Request</button></Link>
-                </div>
               </div>
             </div>
           ))}
         </div>
-
-        {/* {allToys.map((allToy) => (
-              <AllItemRow key={allToy._id} allToy={allToy}></AllItemRow>
-            ))} */}
       </div>
       }
       

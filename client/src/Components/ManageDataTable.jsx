@@ -8,7 +8,7 @@ const ManageDataTable = () => {
     const { user } = useContext(AuthContext);
     const email = user?.email;
     useEffect(() => {
-        fetch('http://localhost:5000/allitem')
+        fetch('https://server-dbqzrqfon-elite3.vercel.app/allitem')
             .then(res => res.json())
             .then(item => setItem(item))
     }, [])

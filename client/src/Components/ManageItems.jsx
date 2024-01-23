@@ -22,7 +22,7 @@ const ManageItems = ({ myItem, setMyItem }) => {
         }).then((result) => {
             if (result.isConfirmed) {
                 // pass the item object as a property of the config object
-                axios.delete(`http://localhost:5000/allitem/${item._id}`, { data: item })
+                axios.delete(`https://server-dbqzrqfon-elite3.vercel.app/allitem/${item._id}`, { data: item })
                     // .then(res=>res.json())
                     .then(data => {
                         // console.log(data.data);
