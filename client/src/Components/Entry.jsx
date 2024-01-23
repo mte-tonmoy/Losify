@@ -206,8 +206,8 @@ const Entry = () => {
                     {/* here input the image */}
 
                     <div className="mt-4">
-                      <label htmlFor="image" className="block text-sm font-medium leading-6 text-gray-900">
-                        Upload Image
+                      <label htmlFor="image" className="block text-red-500 font-medium leading-6 text-sm font-bold">
+                      Upload Your Items Previous Photo
                       </label>
                       <input required
                         type="file"
