@@ -12,7 +12,7 @@ const UpdateItem = () => {
 
 
     useEffect(() => {
-        fetch("https://server-dbqzrqfon-elite3.vercel.app/allitem")
+        fetch("https://server-tau-teal.vercel.app/allitem")
             .then((res) => res.json())
             .then((data) => setAllToys(data));
     });
@@ -47,7 +47,7 @@ const UpdateItem = () => {
         };
         console.log(itemData);
 
-        fetch(`https://server-dbqzrqfon-elite3.vercel.app/allitem/${id}`, {
+        fetch(`https://server-tau-teal.vercel.app/allitem/${id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'

@@ -20,7 +20,7 @@ const Entry = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("https://server-dbqzrqfon-elite3.vercel.app/allitem")
+    fetch("https://server-tau-teal.vercel.app/allitem")
       .then((res) => res.json())
       .then((data) => setAllToys(data));
   });
@@ -85,7 +85,7 @@ const Entry = () => {
     };
     console.log(itemData);
 
-    fetch("https://server-dbqzrqfon-elite3.vercel.app/requestData", {
+    fetch("https://server-tau-teal.vercel.app/requestData", {
       method: "POST",
       headers: {
         "content-type": "application/json",

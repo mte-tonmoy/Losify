@@ -9,7 +9,7 @@ const RequestDetails = () => {
     const { id } = useParams();
     const email = user?.email;
     useEffect(() => {
-        fetch('https://server-dbqzrqfon-elite3.vercel.app/requestData')
+        fetch('https://server-tau-teal.vercel.app/requestData')
             .then(res => res.json())
             .then(item => setItem(item))
     }, [])
