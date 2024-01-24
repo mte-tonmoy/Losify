@@ -17,8 +17,19 @@ const SignUp = () => {
     const file = event.target.files[0];
     setImage(file);
   };
+
+
   const navigate = useNavigate();
   const auth = getAuth();
+
+  const isValidEmailDomain = (email, validDomains) => {
+    const lowerCaseEmail = email.toLowerCase();
+    const lowerCaseDomain = lowerCaseEmail.split('@')[1];
+
+    return validDomains.includes(lowerCaseDomain);
+  };
+
+
   const handleSignUp = async (event) => {
     event.preventDefault();
     const form = event.target;
@@ -31,10 +42,18 @@ const SignUp = () => {
       },
     });
 
+    const email = form.email.value;
+    const validDomains = ['gmail.com', 'diu.edu.bd'];
+
+    if (!isValidEmailDomain(email, validDomains)) {
+      setError('Invalid email domain. Please use a valid email address.');
+      return;
+    }
+
     const imageUrl = res.data.data.url;
     const name = form.name.value;
     const photo = form.photo.value;
-    const email = form.email.value;
+    // const email = form.email.value;
     const password = form.password.value;
     console.log(name, email, password, photo);
 
@@ -151,11 +170,12 @@ const SignUp = () => {
                   <span className="label-text">Email</span>
                 </label>
                 <input
-                  type="text"
+                  type="email"
                   name="email"
                   placeholder="email"
                   className="input input-bordered"
                 />
+                { error ? <p className="text-red-800">Enter a valid email address</p> : ''}
               </div>
 
               <div className="form-control">
